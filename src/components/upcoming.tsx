@@ -46,14 +46,14 @@ function Upcoming() {
 
   return (
     <div className="text-[20px] text-black ">
-      <h1 className="font-extrabold ml-[20px] mb-[30px] text-[24px] font-[Inter] mt-[10px]">Upcoming</h1>
+      <h1 className="font-extrabold ml-[20px] mb-[30px] text-[24px] font-[Inter] mt-[10px] dark:text-white">Upcoming</h1>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 ml-4">
           {movies.slice(0,10).map((movie) => (
-            <div key={movie.id} className="rounded-md shadow w-[157.5px] h-[309.1px] bg-[#F4F4F5] mb-[20px] text-start">
-              <img src={movie.poster}  className="w-[157.5px] h-[233.1px] rounded-tl-md rounded-tr-md  " />
-              <p className="text-black text-[12px] ml-[10px] mt-[6px] ">⭐ {Math.round(movie.rating * 10) / 10}/10</p>
-              <h3 className="text-[14px]  ml-[10px] font-[400]  text-[#09090B]">{movie.title}</h3>
-            </div>
+            <div key={movie.id} className="rounded-md shadow w-[157.5px] min-h-[309.1px] max-h-fit  bg-[#F4F4F5] text-start dark:bg-[#27272A]">
+            <img src={movie.poster}  className="w-[157.5px] h-[233.1px] rounded-tl-md rounded-tr-md dark:text-white " />
+            <p className="text-black text-[12px] ml-[10px] mt-[6px] dark:text-white">⭐ {Math.round(movie.rating * 10) / 10}/10</p>
+            <h3 className="text-[14px] ml-[10px] font-[400]  text-[#09090B] dark:text-white">{movie.title}</h3>
+          </div>
           ))}
         </div>
    
