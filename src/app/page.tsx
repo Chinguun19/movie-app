@@ -1,9 +1,22 @@
 import Image from "next/image";
+import Upcoming from  "../components/upcoming"
+import TopRatedMovies from "../components/topRated";
+import Popular from "@/components/popular";
+import PhoneTop from "@/components/phoneTop";
 
 export default function Home() {
+
+
   return (
-    <div className="h-[3038px] w-screen bg-indigo-500">
-     
-    </div>
+
+    <> 
+    <PhoneTop/>
+    <Upcoming/>
+    <TopRatedMovies/>
+    <Popular/>     
+    </>
+    
+      
+    
   );
 }
