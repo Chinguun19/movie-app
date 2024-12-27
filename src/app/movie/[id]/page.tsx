@@ -8,6 +8,12 @@ type Props = {
     }
 }
 
+type Movie = {
+    id: number;
+    title: string;
+    poster: string;
+    rating: number;
+  };
 
 export default async function Page({params} : Props) {
 
@@ -33,7 +39,7 @@ export default async function Page({params} : Props) {
     const backDropPath = `https://image.tmdb.org/t/p/w1280${data.backdrop_path}`
     const poster = `https://image.tmdb.org/t/p/w500${data.poster_path}`
     console.log(data)
-    console.log(credits)
+    
     
 
 
@@ -42,7 +48,7 @@ export default async function Page({params} : Props) {
     <div className="h-[882px] w-screen">
         <div className="h-fit w-fit relative">
             <h1 className="text-black dark:text-white text-[24px] font-[600] ml-[20px] mt-[32px]" >{data.title}</h1>
-            <h3 className="text-black text-[14px] font-[400] ml-[20px] mb-[12px] dark:text-white">{data.release_date} · PG · 2h 40m</h3>  
+            <h3 className="text-black text-[14px] font-[400] ml-[20px] mb-[12px] dark:text-white">{data.release_date} · PG · {Math.trunc(data.runtime / 60)}h · {data.runtime % 60}m</h3>  
             <h3 className="absolute right-[50px] top-[-20px]"></h3>
             <h3> </h3>
             <img src={backDropPath}></img>      

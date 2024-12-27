@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import Upcoming from  "../components/upcoming"
 import TopRatedMovies from "../components/topRated";

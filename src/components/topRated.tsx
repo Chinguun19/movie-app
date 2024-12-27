@@ -41,6 +41,8 @@ function TopRatedMovies () {
     }
   };
 
+  const id = "top_rated"
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,9 +50,12 @@ function TopRatedMovies () {
   return (
     <div className="text-[20px] text-black ">
       <h1 className="font-extrabold ml-[20px] mb-[30px] text-[24px] font-[Inter] mt-[10px] dark:text-white">Top Rated</h1>
+      <Link href={`/category/${id}`}>
+      <h2 className="dark:text-white">See more</h2>
+      </Link>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 ml-4">
           {movies.slice(0,10).map((movie) => (
-               <Link href={`/movie/${movie.id}`}>
+               <Link key={movie.id} href={`/movie/${movie.id}`}>
             <div key={movie.id} className="rounded-md shadow w-[157.5px] min-h-[309.1px] max-h-fit  bg-[#F4F4F5] text-start dark:bg-[#27272A]">
             <img src={movie.poster}  className="w-[157.5px] h-[233.1px] rounded-tl-md rounded-tr-md dark:text-white " />
             <p className="text-black text-[12px] ml-[10px] mt-[6px] dark:text-white">⭐ {Math.round(movie.rating * 10) / 10}/10</p>
