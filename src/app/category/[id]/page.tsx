@@ -1,80 +1,101 @@
+"use client";
 
-import { Badge } from "@/components/ui/badge";
-import { json } from "stream/consumers";
+
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+import { use } from "react"; // Import use() to resolve params
 import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-  } from "@/components/ui/pagination"
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type Props = {
-    params: {
-        id: string;
-    }
-}
+  params: Promise<{ id: string }>; // Adjusted type to Promise
+};
 
-type Movie = {
-    id: number;
-    title: string;
-    poster: string;
-    rating: number;
-    vote_average: number;
+
+ type Movie = {
+  id: number;
+  title: string;
+  poster_path: string;
+  vote_average: number;
+};
+
+export default function Page({ params }: Props) {
+  const resolvedParams = use(params); // Resolve params
+  const { id } = resolvedParams; // Access the `id` property
+  const [movieData, setMovieData] = useState([]);
+  const [page, setPage] = useState(1);
+
+
+  const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US&page=${page}`;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNmM1YmY4NjE0MjVkNDAxMGQ3NWNmZDE0MWMxOWExOCIsIm5iZiI6MTczNDk0OTE4My42NTI5OTk5LCJzdWIiOiI2NzY5MzkzZjYxNzhmY2JiZWFjNGUwMDIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.fONUw9p9dhH-1zkQj9uLhZTao8W4HrUVfqUhSTKDrpE'
+    }
   };
 
+  useEffect(() => {
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => setMovieData(data.results))
+  }, [url]);
 
-export default async function Page({params} : Props) {
+  const handleNext = () => setPage((prev) => prev + 1);
+  const handlePrevious = () => setPage((prev) => Math.max(prev - 1, 1));
 
-
-
-    const url = `https://api.themoviedb.org/3/movie/${params.id}?language=en-US&page=1`;
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNmM1YmY4NjE0MjVkNDAxMGQ3NWNmZDE0MWMxOWExOCIsIm5iZiI6MTczNDk0OTE4My42NTI5OTk5LCJzdWIiOiI2NzY5MzkzZjYxNzhmY2JiZWFjNGUwMDIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.fONUw9p9dhH-1zkQj9uLhZTao8W4HrUVfqUhSTKDrpE'
-      }
-    };
-    
-  const response = await fetch(url, options)
-  const data = await response.json()
-  const results = data.results
-  const posterPath = results.poster_path
-  const poster = `https://image.tmdb.org/t/p/${posterPath}` 
-    
+  const poster = `https://image.tmdb.org/t/p/w500/`;
 
 
 
-    console.log(results)
-    
-    return (
-        <div className="text-[20px] text-black mb-[42px] ">
-      <h1 className="font-extrabold ml-[20px] mb-[30px] text-[24px] font-[Inter] mt-[10px] dark:text-white">{params.id.toUpperCase()}</h1>
-     
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 ml-4">
-          
-     
-          {results.slice(0,10).map((movie: { id: Key | null | undefined; poster: string | undefined; vote_average: number | undefined; rating: number; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
-              <Link key={movie.id} href={`/movie/${movie.id}`}>
-            <div key={movie.id} className="rounded-md shadow w-[157.5px] min-h-[309.1px] max-h-fit  bg-[#F4F4F5] text-start dark:bg-[#27272A]">
-              <img src={poster}  className="w-[157.5px] h-[233.1px] rounded-tl-md rounded-tr-md dark:text-white " />
-              <p className="text-black text-[12px] ml-[10px] mt-[6px] dark:text-white">⭐ {movie.vote_average}/10</p>
-              <h3 className="text-[14px] ml-[10px] font-[400]  text-[#09090B] dark:text-white">{movie.title}</h3>
+  return (
+    <div className="text-[20px] text-black mb-[42px]">
+      <h1 className="font-extrabold ml-[20px] mb-[30px] text-[24px] font-[Inter] mt-[10px] dark:text-white">
+        {id.toUpperCase()}
+      </h1>
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 ml-4">
+        {movieData.map((movie : Movie ) => (
+          <Link key={movie.id} href={`/movie/${movie.id}`}>
+            <div className="rounded-md shadow w-[157.5px] min-h-[309.1px] max-h-fit bg-[#F4F4F5] text-start dark:bg-[#27272A]">
+              <img
+                src={poster + movie.poster_path}
+                alt={`${movie.title} Poster`}
+                className="w-[157.5px] h-[233.1px] rounded-tl-md rounded-tr-md dark:text-white"
+              />
+              <p className="text-black text-[12px] ml-[10px] mt-[6px] dark:text-white">
+                ⭐ {movie.vote_average}/10
+              </p>
+              <h3 className="text-[14px] ml-[10px] font-[400] text-[#09090B] dark:text-white">
+                {movie.title}
+              </h3>
             </div>
-            </Link>
-          ))}
-         
-        </div>
-   
+          </Link>
+        ))}
+      </div>
+      <Pagination className="mt-[30px]">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious onClick={handlePrevious} />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink>{page}</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext onClick={handleNext} />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
-    )
-
-
-
-
-    }
+  );
+}
