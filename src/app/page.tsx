@@ -5,7 +5,7 @@ import Image from "next/image";
 import Upcoming from  "../components/upcoming"
 import TopRatedMovies from "../components/topRated";
 import Popular from "@/components/popular";
-import PhoneTop from "@/components/phoneTop";
+import PhoneTop from "@/components/Top";
 
 export default function Home() {
 

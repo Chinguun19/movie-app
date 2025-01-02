@@ -28,7 +28,7 @@ return (
 
   <CarouselContent>
     <CarouselItem>
-      <img className="h-[246px] w-screen" src="wicked.background.jpeg"></img>
+      <img className="h-[246px] w-screen lg:h-[600px]" src="wicked.background.jpeg"></img>
       <div className="h-[264px] w-screen mt-[20px]" >
         <p className="text-start ml-[20px] text-[#09090B] text-sm font-[400] dark:text-white ">Now Playing</p>
         <h1 className="text-start ml-[20px] text-[#09090B] text-[24px] font-bold dark:text-white">Wicked</h1>
@@ -38,7 +38,7 @@ return (
       </div>
     </CarouselItem>
     <CarouselItem>
-    <img src="superman.webp" className="h-[246px] w-screen "></img>
+    <img src="superman.webp" className="h-[246px] w-screen lg:h-[600px] "></img>
       <div className="mt-[20px]">
       <p className="text-start ml-[20px] text-[#09090B] text-sm font-[400] dark:text-white ">Now Playing</p>
         <h1 className="text-start ml-[20px] text-[#09090B] text-[24px] font-bold dark:text-white ">Superman</h1>
@@ -49,7 +49,7 @@ return (
 
     </CarouselItem>
     <CarouselItem>
-    <img src="moana2.jpg" className="h-[246px] w-screen"></img>
+    <img src="moana2.jpg" className="h-[246px] w-screen lg:h-[600px]"></img>
       <div className="mt-[20px]">
       <p className="text-start ml-[20px] text-[#09090B] text-sm font-[400] dark:text-white ">Now Playing</p>
         <h1 className="text-start ml-[20px] text-[#09090B] text-[24px] font-bold dark:text-white ">Moana 2</h1>

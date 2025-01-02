@@ -15,6 +15,22 @@ export type Movie = {
     rating: number;
   };
 
+  export type CrewMember = {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
+    credit_id: string;
+    department: string;
+    job: string;
+}
+
+
+
 export default async function Page({params} : Props) {
 
 
@@ -39,6 +55,13 @@ export default async function Page({params} : Props) {
     const backDropPath = `https://image.tmdb.org/t/p/w1280${data.backdrop_path}`
     const poster = `https://image.tmdb.org/t/p/w500${data.poster_path}`
     console.log(data)
+
+
+    // const crew = credits.crew;
+
+    // function filterByJob(crewArray: CrewMember[], jobTitle: string): CrewMember[] {
+    //     return crewArray?.filter(crewMember => crewMember.job === jobTitle) || [];
+    // }
     
     
 
@@ -69,7 +92,7 @@ export default async function Page({params} : Props) {
         </div>
         <div >
             <label className="float-left ]"  htmlFor="director">Director</label>
-            <h1 className="flex ml-[200px]" id="director">{credits.cast[0].name}</h1>
+            <h1 className="flex ml-[200px]" id="director">{credits.crew[3].name}</h1>
         </div>
     </div>
     

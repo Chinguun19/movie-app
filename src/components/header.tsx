@@ -1,7 +1,10 @@
 "use client"
 
+import Link from "next/link";
 import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
+import { ChevronRight } from "lucide-react"
+import { Search } from "lucide-react";
 import {Moon, MoonIcon, Sun} from "lucide-react"
 import {
   DropdownMenu,
@@ -26,8 +29,12 @@ const Header = () => {
 
     return (
       <header className="bg-[#FFFFFF] h-[59px] w-screen text-white flex items-center dark:bg-black ">
-        <img src="film.png" className="h-[24px] ml-[10px]  "></img>
-        <h1 className="text-indigo-700 text-[20px] font-[700] ml-[10px] mt-[5px] italic">Movie Z</h1>
+        <Link  href="/">  <img src="film.png" className="h-[24px] ml-[10px]  "></img> </Link>
+
+       <Link href="/"> <h1 className="text-indigo-700 text-[20px] font-[700] ml-[10px] mt-[5px] italic">Movie Z</h1> </Link> 
+        <Button variant="outline" size="icon" className="absolute right-[70px] top-4">
+        <Search className=""/>
+        </Button>
         <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon" className="absolute right-[20px] top-4">
