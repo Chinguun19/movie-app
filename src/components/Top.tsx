@@ -28,7 +28,7 @@ return (
 
   <CarouselContent>
     <CarouselItem>
-      <img className="h-[246px] w-screen lg:h-[600px]" src="wicked.background.jpeg"></img>
+      <img className="w-screen lg:h-[600px]" src="wicked.background.jpeg"></img>
       <div className="h-[264px] w-screen mt-[20px]" >
         <p className="text-start ml-[20px] text-[#09090B] text-sm font-[400] dark:text-white ">Now Playing</p>
         <h1 className="text-start ml-[20px] text-[#09090B] text-[24px] font-bold dark:text-white">Wicked</h1>

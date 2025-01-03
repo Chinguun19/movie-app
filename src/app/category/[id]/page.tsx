@@ -17,6 +17,7 @@ import {
 
 type Props = {
   params: Promise<{ id: string }>; // Adjusted type to Promise
+  title: string
 };
 
 
@@ -54,26 +55,37 @@ export default function Page({ params }: Props) {
 
   const poster = `https://image.tmdb.org/t/p/w500/`;
 
+let title
 
+  function titleHandler() {
+    if(id === "upcoming") {
+      title = "Upcoming"
+    } else if(id === "top_rated") {
+      title = "Top Rated"
+  } else if(id === "popular") {
+    title = "Popular"
+  }
+    }
+    titleHandler()
 
   return (
     <div className="text-[20px] text-black mb-[42px]">
-      <h1 className="font-extrabold ml-[20px] mb-[30px] text-[24px] font-[Inter] mt-[10px] dark:text-white">
-        {id.toUpperCase()}
+      <h1 className="font-extrabold ml-[20px] mb-[30px] text-[24px] font-[Inter] mt-[10px] text-black dark:text-white">
+      {title}
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 ml-4">
         {movieData.map((movie : Movie ) => (
           <Link key={movie.id} href={`/movie/${movie.id}`}>
-            <div className="rounded-md shadow w-[157.5px] h-[309.1px] bg-[#F4F4F5] text-start dark:bg-[#27272A] mt-[20px]">
+            <div className="rounded-md shadow w-[157.5px] h-[309.1px] bg-[#F4F4F5] text-start dark:bg-[#27272A] mt-[20px] md:w-[350px] md:h-[600px] lg:W-[450px] lg:h-[650x]">
               <img
                 src={poster + movie.poster_path}
                 alt={`${movie.title} Poster`}
-                className="w-[157.5px] h-[233.1px] rounded-tl-md rounded-tr-md dark:text-white"
+                className="w-[157.5px] h-[233.1px] rounded-tl-md rounded-tr-md dark:text-white md:w-[350px] md:h-[500px] lg:w-[450px] lg-h-[600px]"
               />
-              <p className="text-black text-[12px] ml-[10px] mt-[6px] dark:text-white">
+              <p className="text-black text-[12px] ml-[10px] mt-[6px] dark:text-white lg:text-[14px]">
                 ⭐ {Math.round(movie.vote_average * 10) / 10}/10
               </p>
-              <h3 className="text-[14px] ml-[10px] font-[400] text-[#09090B]  text-ellipsis text-pretty truncate line-clamp-2 dark:text-white">
+              <h3 className="text-[14px] ml-[10px] font-[400] text-[#09090B]  text-ellipsis text-pretty truncate line-clamp-2 dark:text-white lg:text-[27px]">
                 {movie.title}
               </h3>
             </div>
