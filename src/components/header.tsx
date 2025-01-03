@@ -21,6 +21,7 @@ import { PopoverClose } from "@radix-ui/react-popover";
 import { useEffect, useState } from "react";
 import { title } from "process";
 
+
 type Genres = {
   name: string;
   id: number;
@@ -68,7 +69,8 @@ const Header = () => {
       const formattedSearchedMovies = data.results.map((movies: Movie) => ({
         title: movies.title,
         poster_path: `https://image.tmdb.org/t/p/w500/${movies.poster_path}`,
-        release_date: movies.release_date
+        release_date: movies.release_date,
+        id: movies.id
       }));
       setSearchMovies(formattedSearchedMovies)
     }
@@ -155,20 +157,22 @@ const Header = () => {
             <input type="text" placeholder="Search" value={search} onChange={handleChange} className=" placeholder:pl-[10px] pl-[20px] border-none rounded-md h-10 w-[260px] ml-[10px] " />
       
             {isOpen && (
-            <div key="2" className="h-fit z-99 bg-white text-black rounded-lg w-[600px] absolute top-[58px] pt-[20px]">
+            <div className="h-fit z-99 bg-white text-black rounded-lg w-[600px] absolute top-[58px] pt-[20px]">
       {searchMovies.slice(0,5).map((results) => (
+        <Link href={`/movie/${results.id}`}> 
         <div key={results.id} className="h-[116px] mb-[25px] w-[311px] flex ">
           <img className="h-[100px] w-[67px] ml-[10px] rounded-lg" src={results.poster_path}></img>
           <h1 className="text-left ml-[20px] text-[20px] font-[600]">{results.title}</h1>
-          <p></p>
-          <h3 className="text-black">{results.release_date}</h3>
+          <p className="text-black "></p>
+          {/* <h3 className="text-black">{results.release_date}</h3> */}
         </div>
+</Link>
       ))}
       </div>
             )}
             </DropdownMenu>
           </div>
-          <PopoverClose className=" ml-[97%] ">X</PopoverClose>
+          <PopoverClose className=" ml-[97%] " onClick={c => setSearch("")}>X</PopoverClose>
         </PopoverContent>
       </Popover>
 
