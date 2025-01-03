@@ -26,9 +26,9 @@ return (
     align: "start"
   }}>
 
-  <CarouselContent>
+  <CarouselContent >
     <CarouselItem>
-      <img className="w-screen lg:h-[600px]" src="wicked.background.jpeg"></img>
+      <img className="w-screen lg:h-[800px]" src="wicked.background.jpeg"></img>
       <div className="h-[264px] w-screen mt-[20px]" >
         <p className="text-start ml-[20px] text-[#09090B] text-sm font-[400] dark:text-white ">Now Playing</p>
         <h1 className="text-start ml-[20px] text-[#09090B] text-[24px] font-bold dark:text-white">Wicked</h1>
@@ -38,7 +38,7 @@ return (
       </div>
     </CarouselItem>
     <CarouselItem>
-    <img src="superman.webp" className="h-[246px] w-screen lg:h-[600px] "></img>
+    <img src="superman.webp"  className=" lg:h-[800px] h-[246px] w-screen  "></img>
       <div className="mt-[20px]">
       <p className="text-start ml-[20px] text-[#09090B] text-sm font-[400] dark:text-white ">Now Playing</p>
         <h1 className="text-start ml-[20px] text-[#09090B] text-[24px] font-bold dark:text-white ">Superman</h1>

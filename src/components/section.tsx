@@ -11,13 +11,13 @@ type Movie = {
   rating: number;
 };
 
-type UpcomingProps = {
+type SectionProps = {
   endpoint: string; 
   id: string;      
   title: string;   
 };
 
-function Section({ endpoint, id, title }: UpcomingProps) {
+function Section({ endpoint, id, title }: SectionProps) {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const options = {
@@ -48,7 +48,7 @@ function Section({ endpoint, id, title }: UpcomingProps) {
 
   useEffect(() => {
     fetchData();
-  }, [endpoint]);
+  }, []);
 
   return (
     <div className="text-[20px] text-black mb-[50px] justify-center">
